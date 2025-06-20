@@ -1,4 +1,3 @@
-import com.google.gson.FormattingStyle;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import models.Person;
@@ -28,7 +27,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        gson = new GsonBuilder().setFormattingStyle(FormattingStyle.PRETTY).create();
+        gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(person);
         System.out.println("Formatted JSON:");
         System.out.println(jsonString);
