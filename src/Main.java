@@ -1,4 +1,6 @@
+import com.google.gson.FormattingStyle;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.Person;
 
 import java.io.FileReader;
@@ -12,6 +14,7 @@ public class Main {
         print(person);
 
         Gson gson = new Gson();
+
         try (FileWriter writer = new FileWriter("person.json")) {
             gson.toJson(person, writer);
         } catch (IOException e) {
@@ -24,6 +27,11 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        gson = new GsonBuilder().setFormattingStyle(FormattingStyle.PRETTY).create();
+        String jsonString = gson.toJson(person);
+        System.out.println("Formatted JSON:");
+        System.out.println(jsonString);
     }
 
     private static void print(Person person) {
@@ -32,6 +40,7 @@ public class Main {
         for (models.Book book : person.books()) {
             System.out.println("- " + book.title() + " (" + book.pages() + " pages)");
         }
+        System.out.println();
     }
 
     private static Person createPerson() {
